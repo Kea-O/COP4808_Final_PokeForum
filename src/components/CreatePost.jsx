@@ -24,7 +24,7 @@ const CreatePost = () => {
             .insert({
                 title: post.title,
                 type: post.type,
-                authorID: userID,
+                authorID: parseInt(userID),
                 authorName: 'Anon',
                 contentImage: post.contentImage,
                 contentText: post.contentText

@@ -1,5 +1,4 @@
 import { createContext, useEffect, useState } from 'react';
-import { v4 as uuidv4 } from 'uuid';
 
 // Create a UserContext to store the userID and make it accessible 
 // across other pages.
@@ -9,13 +8,12 @@ export function UserProvider({ children }) {
   const [visitorId, setVisitorId] = useState(null);
 
   useEffect(() => {
-    // Look for existing ID
+    // Look for existing ID; create one if it doesn't exist.
     let savedId = localStorage.getItem('anon_id');
     
-    // Create one if it doesn't exist Use crypto.randomUUID() to 
-    // generate a unique ID for users.
+    // Use crypto.randomUUID() to generate a unique ID for users.
     if (!savedId) {
-      savedId = crypto.randomUUID();
+      savedId = Date.now().toString() + Math.floor(Math.random() * 10000).toString();
       localStorage.setItem('anon_id', savedId);
     }
     

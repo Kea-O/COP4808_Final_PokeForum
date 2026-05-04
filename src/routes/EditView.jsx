@@ -1,4 +1,4 @@
-import PostDetail from "../components/EditPost.jsx"
+import EditPost from "../components/EditPost.jsx"
 
 const EditView = () => {
   return (

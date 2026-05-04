@@ -1,5 +1,6 @@
 import { createRoot } from 'react-dom/client'
 import { BrowserRouter, Route, Routes } from "react-router"
+import { UserProvider } from './components/UserContext.jsx';
 import './index.css'
 import App from './App.jsx'
 import CreateView from './routes/CreateView.jsx'

@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { supabase } from '../client'
 
-const CommentView = ({id, userID}) => {
+const CommentView = ({id, userID, authorName}) => {
     // Store comment details:
     const [comments, setComments] = useState([]);
 
@@ -34,14 +34,19 @@ const CommentView = ({id, userID}) => {
         // Prevent page refresh on form submit:
         e.preventDefault();
         // Insert the new comment into the SupaBase database
-        await supabase
+        const {data} = await supabase
             .from('Comments')
             .insert({
                 postID: id,
-                authorID: userID,
+                authorID: parseInt(userID),
                 authorName: 'Anon',
                 contentText: commentInput
-            });
+            })
+            .select()
+            .single();
+        // Update the comments locally as well:
+        setComments([data, ...comments]);
+        setCommentInput("");
     };
 
     // Use a UseEffect to fetch the SupaBase data for the post using the specific
@@ -53,7 +58,7 @@ const CommentView = ({id, userID}) => {
                 .from('Comments')
                 .select()
                 .eq('postID', id)
-                .order('created_at', { ascending: true })
+                .order('created_at', { ascending: false })
             setComments(data)
             setLoading(false);
         };
@@ -79,19 +84,25 @@ const CommentView = ({id, userID}) => {
             {/* Comment section */}
             <div className="comment-container">
                 {comments && comments.length > 0 ? (
-                    comments.map((comment) => (
-                        <div key={comment.id} className="comment">
-                            <div className="comment-general">
-                                <p className="comment-author">{comment.userID}</p>
-                                <p className="comment-date">{comment.created_at}</p>
-                                <p className="comment-content">{comment.contentText}</p>
+                    comments.map((comment) => {
+                        // If comment is null or undefined, don't try to render it
+                        if (!comment) return null;
+
+                        return (
+                            <div key={comment.id} className="comment">
+                                <div className="comment-buttons">
+                                    <button className="comment-upvote-button" onClick={() => voteComment(comment.id, comment.score, 1)}>▲</button>
+                                    <span className="comment-score">{comment.score || 0}</span>
+                                    <button className="comment-downvote-button" onClick={() => voteComment(comment.id, comment.score, -1)}>▼</button>
+                                </div>
+                                <div className="comment-general">
+                                    
+                                    <p className="comment-author">{comment?.authorName}  {new Date(comment?.created_at).toLocaleDateString()}</p>
+                                    <p className="comment-content">{comment?.contentText}</p>
+                                </div>
                             </div>
-                            <div className="comment-buttons">
-                                <button className="comment-upvote-button" onClick={() => voteComment(comment.id, comment.score, 1)}>↑</button>
-                                <button className="comment-downvote-button" onClick={() => voteComment(comment.id, comment.score, -1)}>↓</button>
-                            </div>
-                        </div>
-                    ))
+                        );
+                    })
                 ) : (
                     <p className="no-comments-text">No comments yet. Be the first to comment!</p>
                 )}

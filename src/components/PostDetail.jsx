@@ -66,48 +66,48 @@ const PostDetail = () => {
     // If we can find a post, show the post details:
     return (
         <div className="PostDetail">
-            <button onClick={() => navigate(-1)} className="back-button">← Back</button>
-
-            {/* General Post Info (title, type, author) */}
-            <div className="post-detail-container">
-                <div className="post-detail-general-container">
-                    <p className="post-detail-title">{post?.title}</p>
-                    <p className="post-detail-date">Created: {post?.created_at}</p>
-                    <p className="post-detail-type">{post?.type}</p>
-                    <p className="post-detail-author">By {post?.authorName}</p>
-                    <p className="post-detail-score">Score: {post?.score}</p>
-
-                    {/* Buttons to increase or decrease the post's score: */}
-                    <div className="post-detail-buttons">
-                        <button className="post-detail-upvote-button" onClick={() => votePost(post.id, post.score, 1)}>↑</button>
-                        <button className="post-detail-downvote-button" onClick={() => votePost(post.id, post.score, -1)}>↓</button>
-                    </div>
-
-                    {/* Edit Link. Check if the user's ID matches the post's author ID. */}
-                    {post?.authorID === userID && (
-                        <button className="post-detail-edit-button" onClick={() => navigate(`/edit/${post.id}`)}>
-                            Edit
-                        </button>
-                    )}
-                </div>
+            {/* LEFT SIDEBAR: Arrows and Score */}
+            <div className="post-detail-left-sidebar">
+                <button className="post-detail-upvote-button" onClick={() => votePost(post.id, post.score, 1)}>▲</button>
+                <p className="post-detail-score">{post?.score}</p>
+                <button className="post-detail-downvote-button" onClick={() => votePost(post.id, post.score, -1)}>▼</button>
             </div>
 
-            {/* An image, if the post has one */}
-            {post?.contentImage && (
-                <div className="post-detail-image-container">
-                    <img src={post.contentImage} alt={post.title} className="post-detail-image" />
-                </div>
-            )}
+            {/* MAIN COLUMN: Everything else */}
+            <div className="post-detail-main-column">
+                <button onClick={() => navigate(-1)} className="back-button">← Back</button>
 
-            {/* The main content of the post */}
-            {post?.contentText && (
-                <div className="post-detail-content-container">
-                    <p className="post-detail-content">{post?.contentText}</p>
+                {parseInt(post?.authorID) === parseInt(userID) && (
+                    <button 
+                        className="post-detail-edit-button" 
+                        onClick={() => navigate(`/edit/${post.id}`)}
+                    >
+                        Edit Post
+                    </button>
+                )}
+                
+                <div className="post-detail-general-container">
+                    <h1 className="post-detail-title">{post?.title}</h1>
+                    
+                    <div className="post-detail-meta-row">
+                        <span className="post-detail-type">{post?.type}</span>
+                        <span className="post-detail-author">by {post?.authorName}</span>
+                        <span className="post-detail-date">
+                            {new Date(post?.created_at).toLocaleDateString()}
+                        </span>
+                    </div>
                 </div>
-            )}
 
-            {/* Comment section */}
-            <CommentView id = {post?.id} userId = {userID} />
+                {post?.contentImage && (
+                    <div className="post-detail-image-container">
+                        <img src={post.contentImage} alt="" className="post-detail-image" />
+                    </div>
+                )}
+
+                <p className="post-detail-content">{post?.contentText}</p>
+
+                <CommentView id={post?.id} userID={userID} authorName={post?.authorName} />
+            </div>
         </div>
     );
 }

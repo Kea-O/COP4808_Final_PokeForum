@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import { Link } from "react-router"
-import { supabase } from '../client'
+import { supabase } from './client.js'
 import './App.css'
 
 function App() {
@@ -22,15 +22,16 @@ function App() {
 
   // Variable that will contain the filtered results. Account for the type
   // value being empty, which means we want all types.
-  const filteredPosts = posts.filter(post => {
+  const filteredPosts = posts?.filter(post => {
     return (
-      post.title.toLowerCase().includes(searchQuery.title.toLowerCase()) &&
-      (searchQuery.type ? post.type === searchQuery.type : true)
+      post?.title?.toLowerCase().includes(searchQuery.title.toLowerCase()) &&
+      (searchQuery.type ? post?.type === searchQuery.type : true)
     );
   });
 
-  // Have a variable that stores how we'll sort the posts
-  const [sortBy, setSortBy] = useState("");
+  // Have a variable that stores how we'll sort the posts. Use a default
+  // value because sortBy isn't given a value when useEffectfirst runs.
+  const [sortBy, setSortBy] = useState("created_at");
 
   // Store if we want the return to be ascending or descending:
   const [isAscending, setIsAscending] = useState(false);
@@ -43,7 +44,7 @@ function App() {
     const fetchPosts = async () => {
       const { data } = await supabase
         .from('Posts')
-        .select('id', 'created_at', 'title', 'type', 'authorName', 'score')
+        .select('id, created_at, title, type, authorName, score')
         .order(sortBy, { ascending: isAscending })
       setPosts(data)
       setLoading(false);
@@ -58,6 +59,11 @@ function App() {
         <h1 className="title">Welcome to PokéForum!</h1>
         <p className="subtitle">A user-centered forum for all things Pokémon!</p>
       </div>
+
+      {/* Button to create a new post */}
+      <Link to="/create" className="create-post-button">
+        Create Post
+      </Link>
 
       {/* Search Inputs */}
       <div className="search-container">
@@ -91,9 +97,9 @@ function App() {
       <div className="post-container">
         {loading ? (
           <p className="loading-text">Loading posts...</p>
-        ) : posts.length > 0 ? (
+        ) : posts?.length > 0 ? (
           <div className="post-list">
-            {filteredPosts.length > 0 ? (
+            {filteredPosts?.length > 0 ? (
               filteredPosts.map(post => (
                 <Link to={`/post/${post.id}`} key={post.id} className="post-link">
                   <div key={post.id} className="post">
@@ -102,7 +108,7 @@ function App() {
                       <p className="post-type">{post.type}</p>
                       <p className="post-author">{post.authorName}</p>
                       <p className="post-score">{post.score}</p>
-                      <p className="post-date">{post.created_at}</p>
+                      <p className="post-date">{new Date(post.created_at).toLocaleString()}</p>
                     </div>
                   </div>
                 </Link>

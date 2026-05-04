@@ -1,6 +1,7 @@
 import { useContext, useState, useEffect } from 'react';
 import { useParams, useNavigate } from "react-router-dom"
 import { UserContext } from './UserContext'
+import { supabase } from '../client.js'
 
 const EditPost = () => {
     // We put the ID of the post in the URL, so we can get it using useParams.
@@ -40,6 +41,12 @@ const EditPost = () => {
             .from('Posts')
             .delete()
             .eq('id', id);
+        
+        // Also delete the comments associated with that post:
+        await supabase
+            .from('Comments')
+            .delete()
+            .eq('postID', id);
 
         // After finishing, navigate back to the homepage.
         navigate('/');

@@ -79,7 +79,7 @@ The following **required** features for Canvas Submission are implemented:
 
 ### CodePath Video:
 
-
+[![Youtube Video going over the Final Project and CodePath functionality](https://img.youtube.com/vi/S1DLt5JE7Qw/0.jpg)](https://www.youtube.com/watch?v=S1DLt5JE7Qw)
 
 ### Canvas Video:
 
