@@ -7,8 +7,8 @@ const CreatePost = () => {
     // Store the post details:
     const [post, setPost] = useState({});
 
-    // Store the generated userID from UserContext:
-    const userID = useContext(UserContext);
+    // Store the user object from UserContext:
+    const { user } = useContext(UserContext);
 
     // Different post types:
     const postTypes = ["Discussion", "Question", "News", "Other"];
@@ -18,20 +18,30 @@ const CreatePost = () => {
         // Prevent page refresh on form submit:
         e.preventDefault();
 
+        // Check if the user is logged in before allowing them to submit a post:
+        if (!user) {
+            alert('You must be logged in to create a post!');
+            return;
+        }
+
         // Insert the new post into the SupaBase database
-        await supabase
+        const { error } = await supabase
             .from('Posts')
             .insert({
                 title: post.title,
                 type: post.type,
-                authorID: parseInt(userID),
-                authorName: 'Anon',
+                authorID: parseInt(user.id),
+                authorName: user.user_metadata?.username || 'Anon',
                 contentImage: post.contentImage,
                 contentText: post.contentText
             });
-
-        // After submitting, navigate back to the homepage.
-        navigate('/');
+        
+        if (error) {
+            console.error('Error creating post:', error);
+        } else {
+            // After submitting, navigate back to the homepage.
+            navigate('/');
+        }
     }
 
     // I can use useNavigate() to easily go forward or backwards in browser history.

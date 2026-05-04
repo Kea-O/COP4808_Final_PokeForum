@@ -6,15 +6,18 @@ import App from './App.jsx'
 import CreateView from './routes/CreateView.jsx'
 import PostView from './routes/PostView.jsx'
 import EditView from './routes/EditView.jsx'
+import LoginView from './routes/LoginView.jsx'
 
 createRoot(document.getElementById('root')).render(
   <UserProvider>
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<App />} />
-        <Route path="/create" element={<CreateView />} />
-        <Route path="/post/:id" element={<PostView />} />
-        <Route path="/edit/:id" element={<EditView />} />
+        <Route path="/login" element={<LoginView />} />
+        {/* Protected Routes:*/}
+        <Route path="/create" element={<ProtectedRoute><CreateView /></ProtectedRoute>} />
+        <Route path="/post/:id" element={<ProtectedRoute><PostView /></ProtectedRoute>} />
+        <Route path="/edit/:id" element={<ProtectedRoute><EditView /></ProtectedRoute>} />
       </Routes>
     </BrowserRouter>
   </UserProvider>

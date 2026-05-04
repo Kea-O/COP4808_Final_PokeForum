@@ -36,17 +36,12 @@ const EditPost = () => {
 
     // Function to handle deleting a post:
     const deletePost = async () => {
-        // Delete the post from the SupaBase database
+        // Delete the post from the SupaBase database. Cascade delete is
+        // set on Supabase's end, so the comments will be deleted automatically.
         await supabase
             .from('Posts')
             .delete()
             .eq('id', id);
-        
-        // Also delete the comments associated with that post:
-        await supabase
-            .from('Comments')
-            .delete()
-            .eq('postID', id);
 
         // After finishing, navigate back to the homepage.
         navigate('/');

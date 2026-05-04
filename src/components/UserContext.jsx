@@ -1,28 +1,38 @@
 import { createContext, useEffect, useState } from 'react';
+import { supabase } from '../client'
 
-// Create a UserContext to store the userID and make it accessible 
-// across other pages.
+// Create a UserContext to store the userID when a user logins.
 export const UserContext = createContext();
 
 export function UserProvider({ children }) {
-  const [visitorId, setVisitorId] = useState(null);
+  // Store the user object in state. This will be generated when the user logins.
+  const [user, setUser] = useState(null);
 
+  // Variable to tell if if the data is loading:
+  const [loading, setLoading] = useState(true);
+
+  // UseEffect to check if the user is logged in when the page loads. If they
+  // are, we get their userID and store it in state.
   useEffect(() => {
-    // Look for existing ID; create one if it doesn't exist.
-    let savedId = localStorage.getItem('anon_id');
-    
-    // Use crypto.randomUUID() to generate a unique ID for users.
-    if (!savedId) {
-      savedId = Date.now().toString() + Math.floor(Math.random() * 10000).toString();
-      localStorage.setItem('anon_id', savedId);
-    }
-    
-    setVisitorId(savedId);
+    // Check for an active session. If there is one, get the user and store it.
+    supabase.auth.getSession().then(({ data: { session } }) => {
+      setUser(session?.user ?? null);
+      setLoading(false);
+    });
+
+    // Account for changes in the login state, such as the user logging in or out.
+    const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
+      setUser(session?.user ?? null);
+    });
+
+    // Remove the subscription when the component unmounts.
+    return () => subscription.unsubscribe();
   }, []);
 
+  // In the return we pass the user object and the loading state:
   return (
-    <UserContext.Provider value={visitorId}>
-      {children}
+    <UserContext.Provider value={{ user, loading}}>
+      {!loading && children}
     </UserContext.Provider>
   );
 }
