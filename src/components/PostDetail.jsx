@@ -1,6 +1,7 @@
 import { useContext, useState, useEffect } from 'react';
 import { useParams, useNavigate } from "react-router-dom"
 import { UserContext } from './UserContext';
+import { supabase } from '../client'
 import CommentView from './CommentView';
 
 const PostDetail = () => {
@@ -101,7 +102,7 @@ const PostDetail = () => {
             {/* The main content of the post */}
             {post?.contentText && (
                 <div className="post-detail-content-container">
-                    <p className="post-detail-content">{post?.contextText}</p>
+                    <p className="post-detail-content">{post?.contentText}</p>
                 </div>
             )}
 

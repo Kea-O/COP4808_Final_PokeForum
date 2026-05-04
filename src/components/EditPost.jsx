@@ -1,5 +1,6 @@
-import { useState, useEffect } from 'react';
+import { useContext, useState, useEffect } from 'react';
 import { useParams, useNavigate } from "react-router-dom"
+import { UserContext } from './UserContext'
 
 const EditPost = () => {
     // We put the ID of the post in the URL, so we can get it using useParams.
@@ -23,8 +24,6 @@ const EditPost = () => {
             .update({
                 title: post.title,
                 type: post.type,
-                authorID: userID,
-                authorName: 'Anon',
                 contentImage: post.contentImage,
                 contentText: post.contentText
             })
@@ -49,7 +48,6 @@ const EditPost = () => {
     // useEffect to fetch the post we're going to edit. Use the ID we got
     // from the URL.
     useEffect(() => {
-        setLoading(true);
         const fetchPost = async () => {
             const { data } = await supabase
                 .from('Posts')
@@ -57,7 +55,6 @@ const EditPost = () => {
                 .eq('id', id)
                 .single()
             setPost(data)
-            setLoading(false);
         };
         fetchPost();
     }, [id]);
@@ -69,12 +66,12 @@ const EditPost = () => {
         <div className="CreatePost">
             {/* Heading container */}
             <div className="create-heading-container">
-                <h1>Create a new post!</h1>
+                <h1>Editing...</h1>
             </div>
 
             {/* Form container */}
             <div className="create-form-container">
-                <form onSubmit={submitPost} className="create-post-form">
+                <form onSubmit={editPost} className="create-post-form">
                     {/* Title is required */}
                     <input 
                         type="text" 
@@ -90,6 +87,7 @@ const EditPost = () => {
                         onChange={(e) => setPost({...post, type: e.target.value})}
                         required
                     >
+                        <option value="" disabled>--Select a Type--</option>
                         {postTypes.map((type) => (
                             <option key={type} value={type}>{type}</option>
                         ))}
@@ -114,6 +112,9 @@ const EditPost = () => {
                     <div className="create-post-buttons">
                         <button type="button" onClick={() => navigate(-1)} className="create-post-discard-button">
                             Cancel
+                        </button>
+                        <button type="button" onClick={deletePost} className="create-post-delete-button">
+                            Delete
                         </button>
                         <button type="submit" className="create-post-submit-button">
                             Submit

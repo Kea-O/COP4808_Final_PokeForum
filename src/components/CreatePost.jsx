@@ -1,5 +1,7 @@
-import { useState, useEffect } from 'react';
+import { useContext, useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { supabase } from '../client'
+import { UserContext } from './UserContext'
 
 const CreatePost = () => {
     // Store the post details:
@@ -60,6 +62,7 @@ const CreatePost = () => {
                         onChange={(e) => setPost({...post, type: e.target.value})}
                         required
                     >
+                        <option value="" disabled>--Select a Type--</option>
                         {postTypes.map((type) => (
                             <option key={type} value={type}>{type}</option>
                         ))}

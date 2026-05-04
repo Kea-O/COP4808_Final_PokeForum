@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
+import { supabase } from '../client'
 
-const CommentView = (id, userID) => {
+const CommentView = ({id, userID}) => {
     // Store comment details:
     const [comments, setComments] = useState([]);
 
@@ -54,9 +55,9 @@ const CommentView = (id, userID) => {
                 .eq('postID', id)
                 .order('created_at', { ascending: true })
             setComments(data)
+            setLoading(false);
         };
         fetchComments();
-        setLoading(false);
     }, [id]);
 
     return (

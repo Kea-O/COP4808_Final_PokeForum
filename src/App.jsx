@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 import { Link } from "react-router"
+import { supabase } from '../client'
 import './App.css'
 
 function App() {
@@ -97,9 +98,12 @@ function App() {
                 <Link to={`/post/${post.id}`} key={post.id} className="post-link">
                   <div key={post.id} className="post">
                     <h2 className="post-title">{post.title}</h2>
-                    <p className="post-type">{post.type}</p>
-                    <p className="post-author">{post.authorName}</p>
-                    <p className="post-score">{post.score}</p>
+                    <div className="post-info-container">
+                      <p className="post-type">{post.type}</p>
+                      <p className="post-author">{post.authorName}</p>
+                      <p className="post-score">{post.score}</p>
+                      <p className="post-date">{post.created_at}</p>
+                    </div>
                   </div>
                 </Link>
               ))
