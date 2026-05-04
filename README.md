@@ -2,7 +2,7 @@
 
 Submitted by: **Keagan O'Leary, Z23695171**
 
-This web app: **is a place for users to discuss and react to Pokémon. Users can create posts of varying types (discussion, news, etc) and either learn more about Pokémon or teach others about it. Posts support images and text. Users can also sort through posts by either their type, the number of people who liked them, and the time they were created at. Users can interact with posts by commenting underneath them.**
+This web app: **is a place for users to discuss and react to Pokémon. Users can create posts of varying types (discussion, news, etc) and either learn more about Pokémon or teach others about it. Posts support images and text. Users can also sort through posts by either their type, the number of people who liked them, and the time they were created at. Users can interact with posts by commenting underneath them. Creators of posts can edit them or delete them at their leisure.**
 
 Time spent: **10** hours spent in total
 
