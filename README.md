@@ -78,6 +78,7 @@ The following **required** features for Canvas Submission are implemented:
 ## App Deployment
 
 App was deployed on Netlify. You can access it via: https://pokeforums.netlify.app/ 
+Warning: Supabase has an email limit of 2 for every hour. If you want to test it, make sure not to reach the limit or else no emails will go through.
 
 ## Video Walkthrough
 
