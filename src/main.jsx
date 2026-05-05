@@ -7,6 +7,8 @@ import CreateView from './routes/CreateView.jsx'
 import PostView from './routes/PostView.jsx'
 import EditView from './routes/EditView.jsx'
 import LoginView from './routes/LoginView.jsx'
+import ProtectedRoute from './routes/ProtectedRoute.jsx';
+import ResetPasswordView from './routes/ResetPasswordView.jsx';
 
 createRoot(document.getElementById('root')).render(
   <UserProvider>
@@ -14,6 +16,7 @@ createRoot(document.getElementById('root')).render(
       <Routes>
         <Route path="/" element={<App />} />
         <Route path="/login" element={<LoginView />} />
+        <Route path="/update-password" element={<ResetPasswordView />} />
         {/* Protected Routes:*/}
         <Route path="/create" element={<ProtectedRoute><CreateView /></ProtectedRoute>} />
         <Route path="/post/:id" element={<ProtectedRoute><PostView /></ProtectedRoute>} />

@@ -1,3 +1,7 @@
+* {
+  box-sizing: border-box;
+}
+
 :root {
   --poke-red: #ef5350;
   --poke-blue: #2a75bb;
@@ -19,6 +23,274 @@ body {
   padding: 20px;
 }
 
+/* Login/Signup page CSS:*/
+/* Container for the whole Login/SignUp page */
+.LoginSignUp {
+    position: relative;
+    max-width: 400px;
+    margin: 60px auto;
+    padding: 40px;
+    background: white;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    border-top: 10px solid var(--poke-red); /* Branding strip */
+}
+
+.google-login-button {
+    display: flex;
+    align-items: center;
+    justify-content: center; /* This centers the group */
+    width: 100%;
+    padding: 12px;
+    margin-top: 15px;
+    background-color: white;
+    color: #333;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.2s;
+    
+    /* Prevent Overlap */
+    gap: 15px !important;    /* Forces a gap even if other styles try to fight it */
+    position: relative;
+    text-align: center;
+}
+
+.google-login-button img {
+    width: 20px;
+    height: 20px;
+    flex-shrink: 0;          /* Forces the image to keep its width */
+    object-fit: contain;
+    display: block;          /* Removes "inline" baseline behavior */
+}
+
+/* Add this to ensure the text has its own 'box' */
+.google-login-button span {
+    flex-shrink: 0;
+    display: inline-block;
+}
+
+.google-login-button:hover {
+  background-color: #f7f7f7;
+  border-color: #ccc;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+.back-home-button {
+  position: absolute;
+  top: 15px;
+  left: 20px;
+  text-decoration: none;
+  color: #888;
+  font-size: 0.85rem;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  transition: color 0.2s;
+}
+
+.back-home-button::before {
+  content: '←'; /* Adds a nice arrow without extra HTML */
+  font-size: 1.1rem;
+}
+
+.back-home-button:hover {
+  color: var(--poke-blue);
+}
+
+.LoginSignUp h1 {
+    color: var(--poke-dark);
+    font-size: 2rem;
+    margin-bottom: 30px;
+}
+
+/* Form layout */
+.login-form, .signup-form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+/* Style for inputs */
+.LoginSignUp input {
+    width: 100%;
+    padding: 14px;
+    border: 2px solid #eee;
+    border-radius: 10px;
+    font-size: 1rem;
+    box-sizing: border-box; /* Crucial for padding! */
+    transition: border-color 0.3s ease;
+}
+
+.LoginSignUp input:focus {
+    outline: none;
+    border-color: var(--poke-blue);
+    background-color: #f0f7ff;
+}
+
+/* The Primary Action Button (Login/Sign Up) */
+.LoginSignUp button[type="submit"] {
+    background-color: var(--poke-blue);
+    color: white;
+    border: none;
+    padding: 15px;
+    border-radius: 10px;
+    font-size: 1.1rem;
+    font-weight: bold;
+    cursor: pointer;
+    margin-top: 10px;
+    transition: all 0.2s ease;
+}
+
+.LoginSignUp button[type="submit"]:hover {
+    background-color: #1e5a92;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(42, 117, 187, 0.3);
+}
+
+/* The "Need an account? / Already have an account?" link */
+.login-toggle {
+    background: none;
+    border: none;
+    color: var(--poke-blue);
+    margin-top: 25px;
+    font-size: 0.9rem;
+    cursor: pointer;
+    text-decoration: underline;
+    opacity: 0.8;
+}
+
+.login-toggle:hover {
+    opacity: 1;
+    color: var(--poke-red);
+}
+
+/* Optional: Loading/Disabled state */
+.LoginSignUp button:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+    transform: none;
+}
+
+/* App.jsx CSS:*/
+.login-container {
+  display: flex;
+  justify-content: flex-end;
+  padding: 10px 20px;
+  margin-bottom: 20px;
+}
+
+.login-button, .logout-button {
+  text-decoration: none;
+  font-weight: bold;
+  padding: 8px 20px;
+  border-radius: 25px;
+  font-size: 0.9rem;
+  transition: all 0.2s ease;
+  cursor: pointer;
+  display: inline-block;
+  border: 2px solid transparent;
+}
+
+.login-button {
+  background-color: var(--poke-blue);
+  color: white;
+}
+
+.login-button:hover {
+  background-color: #1e5a92;
+  box-shadow: 0 4px 10px rgba(42, 117, 187, 0.3);
+  transform: translateY(-1px);
+}
+
+.logout-button {
+  background-color: white;
+  color: var(--poke-red);
+  border: 2px solid var(--poke-red);
+}
+
+.logout-button:hover {
+  background-color: var(--poke-red);
+  color: white;
+  box-shadow: 0 4px 10px rgba(239, 83, 80, 0.2);
+  transform: translateY(-1px);
+}
+
+/* Reset Password CSS:*/
+/* Container for the Reset Password page */
+.ResetPassword {
+    position: relative;
+    max-width: 400px;
+    margin: 80px auto; /* Centered with a bit more top margin */
+    padding: 40px;
+    background: white;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    border-top: 10px solid var(--poke-yellow); /* Yellow strip to differentiate from Login */
+}
+
+.ResetPassword h1 {
+    color: var(--poke-dark);
+    font-size: 1.8rem;
+    margin-bottom: 25px;
+    line-height: 1.2;
+}
+
+/* Form Layout */
+.reset-form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+/* Input Styling */
+.ResetPassword input {
+    width: 100%;
+    padding: 14px;
+    border: 2px solid #eee;
+    border-radius: 10px;
+    font-size: 1rem;
+    box-sizing: border-box;
+    transition: all 0.3s ease;
+}
+
+.ResetPassword input:focus {
+    outline: none;
+    border-color: var(--poke-blue);
+    background-color: #f0f7ff;
+}
+
+/* The Submit Button */
+.ResetPassword button[type="submit"] {
+    background-color: var(--poke-red);
+    color: white;
+    border: none;
+    padding: 15px;
+    border-radius: 10px;
+    font-size: 1.1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.ResetPassword button[type="submit"]:hover {
+    background-color: #d32f2f; /* Darker red */
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(239, 83, 80, 0.3);
+}
+
+/* Optional: Add a helper text style if you add one later */
+.reset-help-text {
+    margin-top: 20px;
+    font-size: 0.85rem;
+    color: #666;
+}
+
+/* App.jsx CSS:*/
 /* Header */
 .title-container {
   text-align: center;
@@ -30,8 +302,40 @@ body {
   margin-bottom: 30px;
 }
 
-.title { margin: 0; font-size: 2.5rem; margin-bottom: 20px; }
+.title-pokeball {
+  display: flex;
+  align-items: center; /* Vertically centers the image with the text */
+  justify-content: center; /* Keeps everything centered in the red box */
+  gap: 10px; /* Space between the text and the ball */
+  margin-bottom: 20px; /* Matches your old .title margin */
+}
+
+.title {
+  margin: 0; /* Remove margins so they don't push the text away from the ball */
+  font-size: 2.5rem;
+  line-height: 1; /* Helps with vertical alignment */
+}
+
+.pokeball-image {
+  height: 2.5rem; /* Matches the font-size of your title exactly */
+  width: auto; /* Keeps the aspect ratio perfect */
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2)); /* Optional: adds a little depth */
+}
+
 .subtitle { margin-top: 10px; opacity: 0.9; }
+
+/* Creating posts section */
+.create-heading-container {
+    text-align: center;
+    margin-top: 40px;
+    margin-bottom: 20px;
+}
+
+.create-heading-container h1 {
+    color: var(--poke-dark);
+    font-size: 2.2rem;
+    font-weight: 800;
+}
 
 /* Button for creating posts */
 .create-post-button {
@@ -389,7 +693,9 @@ select option {
   line-height: 1.6;
   color: #333;
   white-space: pre-wrap; /* Keeps line breaks from your textarea */
-  margin: 20px 0;
+  border-bottom: 2px solid #eee;
+  padding-bottom: 25px;
+  margin-bottom: 25px;
 }
 
 /* VOTE BUTTONS */
@@ -561,4 +867,177 @@ select option {
     color: #3c5aa6;
     font-size: 0.9rem;
     margin-bottom: 5px;
+}
+
+/* AI Summary CSS */
+/* AI Summary Section with Professor Oak */
+.ai-summary-container {
+    display: flex; /* Aligns Oak and the speech bubble side-by-side */
+    align-items: flex-start; /* Keeps Oak near the top of the bubble */
+    gap: 25px; /* Space between Oak and the bubble */
+    width: 100%;
+    border-bottom: 2px solid #eee;
+    padding-bottom: 25px;
+    margin-bottom: 25px;
+}
+
+/* 1. Oak's Container */
+.oak-image-container {
+    flex-shrink: 0; /* Prevents Oak from being squished */
+    width: 120px; /* Adjust this based on your image's size */
+}
+
+.oak-image {
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+    /* Optional: A little depth */
+    filter: drop-shadow(2px 4px 6px rgba(0,0,0,0.1));
+}
+
+/* 2. The Speech Bubble Container */
+.oak-speech-bubble {
+    flex: 1; /* Takes up the remaining width */
+    background: white;
+    border: 3px solid var(--poke-blue);
+    border-radius: 20px;
+    padding: 25px;
+    position: relative; /* Essential for the pointer arrow */
+    box-shadow: 0 6px 15px rgba(0,0,0,0.05);
+    text-align: left; /* Changes text alignment for readability */
+}
+
+/* 3. The Speech Bubble "Pointer" (the arrow) */
+.oak-speech-bubble::before {
+    content: '';
+    position: absolute;
+    left: -15px; /* Pushes arrow outside the bubble */
+    top: 30px; /* Aligns arrow with Oak's head area */
+    width: 0;
+    height: 0;
+    border-top: 15px solid transparent;
+    border-bottom: 15px solid transparent;
+    border-right: 15px solid var(--poke-blue); /* Matches the bubble border */
+}
+
+/* Re-using some old styles but adjusting alignment */
+.ai-summary-prompt {
+    font-weight: 900;
+    color: var(--poke-dark);
+    margin-bottom: 15px;
+    font-size: 1.1rem;
+}
+
+.ai-summary-button {
+    background-color: var(--poke-red); /* Changes to red for visual contrast */
+    color: white;
+    border: none;
+    padding: 10px 25px;
+    border-radius: 30px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.2s;
+    display: inline-block; /* Essential for padding/hover */
+}
+
+.ai-summary-button:hover:not(:disabled) {
+    background-color: #d32f2f;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(239, 83, 80, 0.3);
+}
+
+.ai-summary-button:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+    opacity: 0.8;
+}
+
+.ai-generating-text {
+    margin-top: 15px;
+    font-style: italic;
+    color: #666;
+    animation: oak-pulse 1.5s infinite;
+}
+
+/* Adjusting the internal summary box */
+.ai-summary-text-container {
+    margin-top: 20px;
+    padding: 15px;
+    background: #f9f9f9;
+    border-radius: 8px;
+    border-left: 5px solid var(--poke-yellow);
+}
+
+.ai-summary-text {
+    line-height: 1.6;
+    color: #333;
+    font-size: 0.95rem;
+    margin: 0;
+}
+
+.oak-signoff {
+    margin-top: 10px;
+    font-weight: bold;
+    color: var(--poke-blue);
+    text-align: right;
+    font-size: 0.85rem;
+}
+
+@keyframes oak-pulse {
+    0% { opacity: 0.6; }
+    50% { opacity: 1; }
+    100% { opacity: 0.6; }
+}
+
+/* Reset Password Form specific layout */
+.reset-form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    width: 100%;
+    max-width: 350px;
+    margin: 20px auto;
+}
+
+/* Style the Reset button specifically */
+.reset-form button[type="submit"] {
+    background-color: var(--poke-blue);
+    color: white;
+    border: none;
+    padding: 12px;
+    border-radius: 8px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+.reset-form button[type="submit"]:hover {
+    background-color: #1e5a92; /* Darker blue */
+}
+
+/* The Back Button */
+.back-home-button {
+    background: none;
+    border: none;
+    color: #666;
+    font-size: 0.9rem;
+    cursor: pointer;
+    text-decoration: underline;
+    align-self: flex-start; /* Keeps it on the left */
+    margin-bottom: 10px;
+    transition: color 0.2s;
+}
+
+.back-home-button:hover {
+    color: var(--poke-red);
+}
+
+/* Animations for switching between forms */
+.LoginSignUp {
+    animation: fadeIn 0.4s ease-in-out;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
 }

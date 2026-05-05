@@ -30,7 +30,7 @@ const CreatePost = () => {
             .insert({
                 title: post.title,
                 type: post.type,
-                authorID: parseInt(user.id),
+                authorID: user.id,
                 authorName: user.user_metadata?.username || 'Anon',
                 contentImage: post.contentImage,
                 contentText: post.contentText

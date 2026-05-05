@@ -1,6 +1,7 @@
-import { useState, useEffect } from 'react'
+import { useContext, useState, useEffect } from 'react'
 import { Link } from "react-router"
 import { supabase } from './client.js'
+import { UserContext } from './components/UserContext'
 import './App.css'
 
 function App() {
@@ -9,6 +10,9 @@ function App() {
 
   // check if the site is loading data:
   const [loading, setLoading] = useState(true);
+
+  // Store the user object from UserContext:
+  const { user } = useContext(UserContext);
 
   // Filter posts based on a search query. This will contain two values:
   // text for the title, and the type of post (discussion, question, etc).
@@ -36,6 +40,15 @@ function App() {
   // Store if we want the return to be ascending or descending:
   const [isAscending, setIsAscending] = useState(false);
 
+  // A trigger to show a "login" button or "logout" button depending on if the user is logged in or not.
+  const [loggedIn, setLoggedIn] = useState(user !== null);
+
+  // Function for users to log in and logout:
+  const logout = async () => {
+    await supabase.auth.signOut();
+    setLoggedIn(false);
+  }
+
   // UseEffect to get data from SupaBase and fill in the posts variable. 
   // Will run once when the page loads and any time the sorting choices change.
   // Starts with newest first by default.
@@ -54,9 +67,26 @@ function App() {
 
   return (
     <div className="App">
+      {/* Login/Singout button */}
+      <div className="login-container">
+        {loggedIn ? (
+          <button onClick={logout} className="logout-button">
+            Logout
+          </button>
+        ) : (
+          <Link to="/login" className="login-button">
+            Sign Up
+          </Link>
+        )}
+      </div>
+
       {/* Title */}
       <div className="title-container">
-        <h1 className="title">Welcome to PokéForum!</h1>
+        <div className="title-pokeball">
+          <h1 className="title">Poké</h1>
+          <img src="assets/pokeball.png" alt="Pokeball" className="pokeball-image" />
+          <h1 className="title">Forum!</h1>
+        </div>
         <p className="subtitle">A user-centered forum for all things Pokémon!</p>
       </div>
 
@@ -105,9 +135,9 @@ function App() {
                   <div key={post.id} className="post">
                     <h2 className="post-title">{post.title}</h2>
                     <div className="post-info-container">
+                      <p className="post-score">{post.score}</p>
                       <p className="post-type">{post.type}</p>
                       <p className="post-author">{post.authorName}</p>
-                      <p className="post-score">{post.score}</p>
                       <p className="post-date">{new Date(post.created_at).toLocaleString()}</p>
                     </div>
                   </div>

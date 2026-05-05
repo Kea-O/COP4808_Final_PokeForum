@@ -2,9 +2,9 @@
 
 Submitted by: **Keagan O'Leary, Z23695171**
 
-This web app: **is a place for users to discuss and react to Pokémon. Users can create posts of varying types (discussion, news, etc) and either learn more about Pokémon or teach others about it. Posts support images and text, and must be tagged with a type. Users can also sort through posts by either their type, the number of people who liked them, and the time they were created at. Users can interact with posts by commenting underneath them. Each user is assigned an ID so that they can only edit/delete their own posts. Posts have scores attached to them that users can increase or decrease depending on how much they enjoyed the content.**
+This web app: **is a place for users to discuss and react to Pokémon. Initially, users can see a list of posts. To interact or create their own, however, they must create an account. Users can create posts of varying types (discussion, news, etc) and either learn more about Pokémon or teach others about it. Posts support images and text, and must be tagged with a type. Users can also sort through posts by either their type, the number of people who liked them, and the time they were created at. Users can interact with posts by commenting underneath them. Each post also has an AI Professor Oak that the user can ask to generate a summary of the post content and comments. Each user can only edit/delete their own posts. Posts have scores attached to them that users can increase or decrease depending on how much they enjoyed the content.**
 
-Time spent: **10** hours spent in total
+Time spent: **17** hours spent in total
 
 ## Required Features
 
@@ -65,15 +65,19 @@ The following **additional** features are implemented:
 
 The following **required** features for Canvas Submission are implemented:
 
-- [ ] Web App Deployment (5 points). Use one of the following cloud deployment sites: netlify, heroku, etc.
+- [X] Web App Deployment (5 points). Use one of the following cloud deployment sites: netlify, heroku, etc.
   - provide your deployment URL in the github readme and submit your github repo link as part of this submission.
 
-- [ ] Create a User Login & Signup and tie it in with Supabase backend (5 points)
+- [X] Create a User Login & Signup and tie it in with Supabase backend (5 points)
   - Login 1pt - Signup - userid/pw - 1pts - Google/Apple id - 1pt - pw reset flow - 1pt. logout 1pt
 
-- [ ] Use of LLM for app (5 points)
+- [X] Use of LLM for app (5 points)
   - Have LLM provide an overall summary of Post.  Need to provide title, description, posts, upvotes, comments. 
   - Display LLM summary in a nice way on the UI
+
+## App Deployment
+
+App was deployed on Netlify. You can access it via: https://pokeforums.netlify.app/ 
 
 ## Video Walkthrough
 
@@ -83,11 +87,12 @@ The following **required** features for Canvas Submission are implemented:
 
 ### Canvas Video:
 
+[![Youtube Video going over the Final Project and Canvas functionality](https://img.youtube.com/vi/ZtyJINmWz8s/0.jpg)](https://www.youtube.com/watch?v=ZtyJINmWz8s)
 
 
 ## Notes
 
-The most difficulty I had with this app was working through the optional challenge of assigning an ID to a user. I initially thought that I might have to assign an ID in the root file, main.jsx, and spread it to every route from there, but that still leaves a risk of someone refreshing a page. After researching it a bit, I found that React has a "createContext" function that works well for this king of thing. It stores the user's ID on local storage, so no web refreshing will disrupt it. I just needed to export the function that returns the ID and it worked wonderfully.
+The most difficulty I had with this app was working through the user authentication with Supabase. There was just so much that needed to be done; connect to Supabase, have a login/logout/signup/reset password, make sure the authentication is going through, having a separate table for users and their usernames, etc. I also neeed to wrap some of my routes in ProtectedRoutes, which basically means only people who are logged in can enter. Saving the user data when people login was also confusing, mostly because we never went over it in class. Creating a supabase session and everything associated with it was head-scratching. 
 
 ## License
 
