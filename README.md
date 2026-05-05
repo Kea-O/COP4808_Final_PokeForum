@@ -89,7 +89,7 @@ Warning: Supabase has an email limit of 2 for every hour. If you want to test it
 
 ### Canvas Video:
 
-[![Youtube Video going over the Final Project and Canvas functionality](https://img.youtube.com/vi/ZtyJINmWz8s/0.jpg)](https://www.youtube.com/watch?v=ZtyJINmWz8s)
+[![Youtube Video going over the Final Project and Canvas functionality](https://img.youtube.com/vi/-rVgonXCMG4/0.jpg)](https://www.youtube.com/watch?v=-rVgonXCMG4)
 
 
 ## Notes
