@@ -81,7 +81,7 @@ App was deployed on Netlify. You can access it via: https://pokeforums.netlify.a
 
 **Alert**: May be down if Supabase paused the project. I usually go and continue the project when notified by Supabase
 
-Warning: Supabase has an email limit of 2 for every hour. If you want to test it, make sure not to reach the limit or else no emails will go through.
+**Warning**: Supabase has an email limit of 2 for every hour. If you want to test it, make sure not to reach the limit or else no emails will go through.
 
 ## Video Walkthrough
 
