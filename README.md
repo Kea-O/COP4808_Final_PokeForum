@@ -77,7 +77,9 @@ The following **required** features for Canvas Submission are implemented:
 
 ## App Deployment
 
-App was deployed on Netlify. You can access it via: https://pokeforums.netlify.app/ 
+App was deployed on Netlify. You can access it via: https://pokeforums.netlify.app/
+
+You can login with an example user; **Email**: heracross83@gmail.com, **Password**: welcomeHomeSenator
 
 **Alert**: May be down if Supabase paused the project. I usually go and continue the project when notified by Supabase
 
